@@ -1,19 +1,23 @@
 <template>
   <div>
-  <h2>Task index</h2>
+    <h2>Task index</h2>
   </div>
 </template>
 
 <script>
+import { useStore } from "vuex";
 
-// import { computed } from "vue";
 export default {
   name: "HomeComp",
   setup() {
+    const store = useStore();
 
-    // const count = computed(() => store.state.count);
+    function fetchTask() {
+      store.dispatch("fetchTasks");
+    }
+    fetchTask();
 
-    // return { count };
+    return { fetchTask };
   },
 };
 </script>
