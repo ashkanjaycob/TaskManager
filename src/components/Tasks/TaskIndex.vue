@@ -1,7 +1,21 @@
 <template>
   <div>
-    <h2>Task index</h2>
-    <p>{{tasks}}</p>
+    <div class="container">
+      <div class="row g-3 mt-4">
+        <div v-for="task in tasks" :key="task.id" class="col-md-4">
+
+          <div class="card" :class="{'bg-danger' : task.completed }">
+
+            <div class="card-body ">
+             <del v-if="task.completed">{{ task.title }} </del>
+             <div v-else >{{ task.title }}</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -22,7 +36,7 @@ export default {
     }
     fetchTask();
 
-    return { fetchTask , tasks};
+    return { fetchTask, tasks };
   },
 };
 </script>
