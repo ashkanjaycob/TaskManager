@@ -5,18 +5,21 @@ const store = createStore({
   state: {
     tasks: [],
   }, 
+  getters:{
+    allTasks(state){
+      return state.tasks
+    }
+  }, 
+  mutations:{
+    setTasks(state , tasks){
+      state.tasks = tasks
+    }
+  } , 
   actions: {
-    fetchTasks() {
-      axios
-        .get("https://jsonplaceholder.typicode.com/todos")
-        .then(function (response) {
-          // handle success
-          console.log(response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
+    async fetchTasks( {commit} ) {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+      commit( 'setTasks' , response.data)
+      console.log(response);
     },
   },
 });
