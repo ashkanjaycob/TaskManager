@@ -33,6 +33,24 @@ const store = createStore({
         });
       }
     },
+
+    async filterTasks({ commit } , limit ) {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/todos"
+        );
+        commit("setTasks", response.data);
+        console.log(response);
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "some Error is Happening :(",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    },
+
   },
 });
 
