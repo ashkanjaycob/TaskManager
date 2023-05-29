@@ -37,7 +37,7 @@ const store = createStore({
     async filterTasks({ commit } , limit ) {
       try {
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/todos"
+          `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`
         );
         commit("setTasks", response.data);
         console.log(response);
