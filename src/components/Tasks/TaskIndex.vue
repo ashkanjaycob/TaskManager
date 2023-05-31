@@ -2,6 +2,7 @@
   <div>
 
     <div class="container">
+      <CreateTask class="mt-5" />
       <div class="row d-flex justify-content-center" v-if="isHide">
       <div class="spinner-border mt-5 text-danger"  style="width: 3rem; height: 3rem;" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -32,11 +33,13 @@
 import { useStore } from "vuex";
 import { computed , ref } from "vue";
 import filterTask from "../filterTask.vue";
+import CreateTask from "../Tasks/CreateTask.vue";
 
 export default {
   name: "HomeComp",
   components:{
-    filterTask
+    filterTask , 
+    CreateTask
   } , 
   setup() {
     const store = useStore();
