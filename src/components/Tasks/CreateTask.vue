@@ -10,7 +10,9 @@
         </div>
       </div>
       <div class="col-md-6">
-        <button type="submit" class="btn btn-dark">Create</button>
+        <button type="submit" class="btn btn-dark w-25">
+          Create <span v-if="loading" class="spinner-border spinner-border-sm mx-2"></span>
+        </button>
       </div>
     </form>
 
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 import { ref } from 'vue';
 
 export default {
@@ -26,22 +28,27 @@ export default {
 
   setup() {
 
-    // const store = useStore();
+    const store = useStore();
     const title = ref("");
     const titleError = ref("");
+    const loading = ref(false)
 
-    function storeTask(){
-      if (title.value ==="") {
+    async function storeTask(){
+      if (title.value =="" ) {
         titleError.value = "This title is Required";
       }else {
+        loading.value = true;  
         titleError.value = "";
+        await store.dispatch("storeTask" , title.value);
+        loading.value = false;
       }
     }
       
       return {
         storeTask , 
         title , 
-        titleError
+        titleError,
+        loading
       }
     }
 
