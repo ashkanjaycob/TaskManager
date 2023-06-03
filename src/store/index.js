@@ -23,6 +23,9 @@ const store = createStore({
       if(index != -1){
         state.tasks.splice(index , 1 , UpdateTask )
       }
+    },
+    removeTask( state , id){
+      state.tasks = state.tasks.filter(task => task.id != id)
     }
 
   },
@@ -103,6 +106,32 @@ const store = createStore({
         Swal.fire({
           title:"Task Updated ." , 
           icon:"success" ,
+          showConfirmButton: false , 
+          timerProgressBar : true , 
+          timer: 2000 ,
+          toast: true ,
+          position : 'top' ,
+        });
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "some Error is Happening :(",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    },
+    async DeleteTask ({ commit } , id ) {
+      try {
+        await axios.delete(
+          `https://jsonplaceholder.typicode.com/todos/${id}`
+        , {
+
+        });
+        commit("removeTask", id );
+        Swal.fire({
+          title:"Task Deleted." , 
+          icon:"warning" ,
           showConfirmButton: false , 
           timerProgressBar : true , 
           timer: 2000 ,

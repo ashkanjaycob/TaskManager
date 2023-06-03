@@ -20,9 +20,10 @@
               <del v-if="task.completed">{{ task.title }} </del>
               <div v-else>{{ task.title }}</div>
             </div>
-
+            <div class="d-flex flex-row align-items-center">
             <UpdateTask  :task="task"/>
-
+            <DeleteTask  :id="task.id"/>
+          </div>
           </div>
 
         </div>
@@ -37,13 +38,15 @@ import { computed , ref } from "vue";
 import filterTask from "../filterTask.vue";
 import CreateTask from "../Tasks/CreateTask.vue";
 import UpdateTask from "../Tasks/UpdateTask.vue";
+import DeleteTask from "../Tasks/DeleteTask.vue";
 
 export default {
   name: "HomeComp",
   components:{
     filterTask , 
     CreateTask , 
-    UpdateTask
+    UpdateTask , 
+    DeleteTask
   } , 
   setup() {
     const store = useStore();
