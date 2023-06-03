@@ -16,8 +16,14 @@ const store = createStore({
       state.tasks = tasks;
     },
     newTask(state, task) {
-      state.tasks.unshift(task);
+      state.tasks. unshift(task);
     },
+    UpdateTask(state , UpdateTask) {
+      const index = state.tasks.findIndex(task => task.id==UpdateTask.id )
+      if(index != -1){
+        state.tasks.splice(index , 1 , UpdateTask )
+      }
+    }
 
   },
   actions: {
@@ -66,6 +72,36 @@ const store = createStore({
         commit("newTask", response.data);
         Swal.fire({
           title:"Task added" , 
+          icon:"success" ,
+          showConfirmButton: false , 
+          timerProgressBar : true , 
+          timer: 2000 ,
+          toast: true ,
+          position : 'top' ,
+        });
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "some Error is Happening :(",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    },
+     
+    async UpdateTask ({ commit } , task ) {
+      try {
+        const response = await axios.put(
+          `https://jsonplaceholder.typicode.com/todos/${task.id}`
+        , {
+          id: task.id,
+          title : task.title ,
+          completed : !task.completed 
+        });
+        console.log(response );
+        commit("UpdateTask", response.data);
+        Swal.fire({
+          title:"Task Updated ." , 
           icon:"success" ,
           showConfirmButton: false , 
           timerProgressBar : true , 
