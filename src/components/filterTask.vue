@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Filter Tasks</h3>
+        <h3>Filter Tasks :</h3>
         <div class="row">
             <div class="col-md-2 mb-4">
                 <select v-model="number" @change="filterTasks()" class="form-select form-select-sm">

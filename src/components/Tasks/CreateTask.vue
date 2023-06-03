@@ -41,6 +41,7 @@ export default {
         titleError.value = "";
         await store.dispatch("storeTask" , title.value);
         loading.value = false;
+        title.value = "";
       }
     }
       

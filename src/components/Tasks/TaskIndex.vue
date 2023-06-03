@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
 
     <div class="container">
@@ -14,12 +14,14 @@
 
         <div v-for="task in tasks" :key="task.id" class="col-md-4">
 
-          <div class="card" :class="{ 'bg-danger': task.completed }">
+          <div class="card d-flex flex-row align-items-center justify-content-between" :class="{ 'bg-danger': task.completed }">
 
-            <div class="card-body ">
+            <div class="card-body">
               <del v-if="task.completed">{{ task.title }} </del>
               <div v-else>{{ task.title }}</div>
             </div>
+
+            <UpdateTask  :task="task"/>
 
           </div>
 
@@ -34,12 +36,14 @@ import { useStore } from "vuex";
 import { computed , ref } from "vue";
 import filterTask from "../filterTask.vue";
 import CreateTask from "../Tasks/CreateTask.vue";
+import UpdateTask from "../Tasks/UpdateTask.vue";
 
 export default {
   name: "HomeComp",
   components:{
     filterTask , 
-    CreateTask
+    CreateTask , 
+    UpdateTask
   } , 
   setup() {
     const store = useStore();
