@@ -24,7 +24,7 @@ export default {
         async function UpdateTask(task) {
 
             loading.value = true;
-            await store.dispatch("UpdateTask", task);
+            await store.dispatch("task/UpdateTask", task);
             loading.value = false;
         }
 

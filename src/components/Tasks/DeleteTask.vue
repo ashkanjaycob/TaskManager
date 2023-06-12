@@ -20,10 +20,10 @@ export default {
         const store = useStore();
         const loading = ref(false)
 
-        async function DeleteTask (task) {
+        async function DeleteTask () {
 
             loading.value = true; 
-            await store.dispatch("DeleteTask", props.id );
+            await store.dispatch("task/DeleteTask", props.id );
             loading.value = false;
         }
 

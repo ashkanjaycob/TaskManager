@@ -51,14 +51,14 @@ export default {
   setup() {
     const store = useStore();
     const tasks = computed(() => {
-      return store.getters.allTasks
+      return store.getters['task/allTasks']
     })
 
     const isHide = ref(false) ; 
 
     async function fetchTask() {
       isHide.value = true ;
-      await store.dispatch('fetchTasks');
+      await store.dispatch('task/fetchTasks');
       isHide.value = false;
     }
     fetchTask();
